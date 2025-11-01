@@ -1,4 +1,5 @@
 {
+  "actorSpecification": 1,
   "title": "SBA Certifications Search Results",
   "description": "Normalized output from https://search.certifications.sba.gov/_api/v2/search returned by the actor.",
   "schemaVersion": 1,
