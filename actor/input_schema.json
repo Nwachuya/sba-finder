@@ -1,0 +1,342 @@
+{
+  "title": "SBA Certifications Search",
+  "type": "object",
+  "description": "Configure filters that will be sent to https://search.certifications.sba.gov/_api/v2/search. At least one filter must be provided (for example search term, state, SBA certification, NAICS code, etc.).",
+  "schemaVersion": 1,
+  "properties": {
+    "searchTerm": {
+      "title": "Search term",
+      "type": "string",
+      "description": "Full text query used by the Search SBA website (business name, UEI, CAGE code, keywords, etc.)."
+    },
+    "states": {
+      "title": "States or territories",
+      "type": "array",
+      "editor": "array",
+      "description": "Use two-letter abbreviations (case insensitive).",
+      "items": {
+        "type": "string",
+        "enum": [
+          "AL",
+          "AK",
+          "AS",
+          "AZ",
+          "AR",
+          "CA",
+          "CO",
+          "CT",
+          "DE",
+          "DC",
+          "FM",
+          "FL",
+          "GA",
+          "GU",
+          "HI",
+          "ID",
+          "IL",
+          "IN",
+          "IA",
+          "KS",
+          "KY",
+          "LA",
+          "ME",
+          "MH",
+          "MD",
+          "MA",
+          "MI",
+          "MN",
+          "MS",
+          "MO",
+          "MT",
+          "NE",
+          "NV",
+          "NH",
+          "NJ",
+          "NM",
+          "NY",
+          "NC",
+          "ND",
+          "MP",
+          "OH",
+          "OK",
+          "OR",
+          "PW",
+          "PA",
+          "PR",
+          "RI",
+          "SC",
+          "SD",
+          "TN",
+          "TX",
+          "UT",
+          "VT",
+          "VA",
+          "VI",
+          "WA",
+          "WV",
+          "WI",
+          "WY"
+        ]
+      }
+    },
+    "zipCodes": {
+      "title": "ZIP codes",
+      "type": "array",
+      "editor": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "sbaCertifications": {
+      "title": "SBA certifications",
+      "type": "array",
+      "editor": "array",
+      "description": "Pick one or more SBA certifications (values match the website filters).",
+      "items": {
+        "type": "string",
+        "enum": [
+          "1,4",
+          "3",
+          "5",
+          "6",
+          "7,8",
+          "9,10"
+        ]
+      }
+    },
+    "sbaCertificationsOperator": {
+      "title": "SBA certification operator",
+      "type": "string",
+      "enum": [
+        "Or",
+        "And"
+      ],
+      "default": "Or"
+    },
+    "sbaCertificationsIncludePrevious": {
+      "title": "Include previous certifications",
+      "type": "boolean",
+      "default": false
+    },
+    "naicsCodes": {
+      "title": "NAICS codes",
+      "type": "array",
+      "editor": "array",
+      "description": "Enter 6 digit NAICS codes. You can also supply objects with {\"code\": \"541611\", \"label\": \"Administrative Management\"}.",
+      "items": {
+        "type": [
+          "string",
+          "object"
+        ],
+        "properties": {
+          "code": {
+            "type": "string",
+            "title": "NAICS code"
+          },
+          "label": {
+            "type": "string",
+            "title": "NAICS label"
+          }
+        }
+      }
+    },
+    "naicsIsPrimary": {
+      "title": "Require primary NAICS match",
+      "type": "boolean",
+      "default": false
+    },
+    "naicsOperator": {
+      "title": "NAICS operator",
+      "type": "string",
+      "enum": [
+        "Or",
+        "And"
+      ],
+      "default": "Or"
+    },
+    "selfCertifications": {
+      "title": "Self certifications",
+      "type": "array",
+      "editor": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "Self-Certified Small Disadvantaged Business",
+          "HUBZone Joint Venture",
+          "Veteran Owned Business",
+          "Women-Owned Small Business",
+          "Women-Owned Small Business Joint Venture",
+          "Community Development Corporation Owned Firm",
+          "Native American Owned",
+          "Tribally Owned Firm",
+          "American Indian Owned",
+          "Alaskan Native Corporation Owned Firm",
+          "Native Hawaiian Organization Owned Firm"
+        ]
+      }
+    },
+    "keywords": {
+      "title": "Keyword list",
+      "type": "array",
+      "editor": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "keywordOperator": {
+      "title": "Keyword operator",
+      "type": "string",
+      "enum": [
+        "Or",
+        "And"
+      ],
+      "default": "Or"
+    },
+    "lastUpdated": {
+      "title": "Profile last updated",
+      "type": "string",
+      "enum": [
+        "anytime",
+        "past-3-months",
+        "past-6-months",
+        "past-year",
+        "custom"
+      ],
+      "default": "anytime"
+    },
+    "customDateRange": {
+      "title": "Custom updated date range",
+      "type": "object",
+      "description": "Only used when lastUpdated = custom. Dates are interpreted as YYYY-MM-DD.",
+      "properties": {
+        "from": {
+          "title": "From",
+          "type": "string"
+        },
+        "to": {
+          "title": "To",
+          "type": "string"
+        }
+      }
+    },
+    "samActive": {
+      "title": "Active SAM registration",
+      "type": "boolean",
+      "default": false
+    },
+    "qualityStandards": {
+      "title": "Quality assurance standards",
+      "type": "array",
+      "editor": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "ANSI/ASQC Z1.4",
+          "ISO-9000 Series",
+          "ISO 10012-1",
+          "MIL-Q-9858",
+          "MIL-STD-45662A"
+        ]
+      }
+    },
+    "bondingLevels": {
+      "title": "Bonding levels (USD)",
+      "type": "object",
+      "properties": {
+        "constructionIndividual": {
+          "title": "Construction individual",
+          "type": "number",
+          "minimum": 0
+        },
+        "constructionAggregate": {
+          "title": "Construction aggregate",
+          "type": "number",
+          "minimum": 0
+        },
+        "serviceIndividual": {
+          "title": "Service individual",
+          "type": "number",
+          "minimum": 0
+        },
+        "serviceAggregate": {
+          "title": "Service aggregate",
+          "type": "number",
+          "minimum": 0
+        }
+      }
+    },
+    "businessSize": {
+      "title": "Number of employees filter",
+      "type": "object",
+      "properties": {
+        "relation": {
+          "type": "string",
+          "enum": [
+            "at-least",
+            "no-more"
+          ],
+          "default": "at-least"
+        },
+        "numberOfEmployees": {
+          "type": "number",
+          "minimum": 0
+        }
+      }
+    },
+    "annualRevenue": {
+      "title": "Annual gross revenue filter",
+      "type": "object",
+      "properties": {
+        "relation": {
+          "type": "string",
+          "enum": [
+            "at-least",
+            "no-more"
+          ],
+          "default": "at-least"
+        },
+        "annualGrossRevenue": {
+          "type": "number",
+          "minimum": 0
+        }
+      }
+    },
+    "entityDetailId": {
+      "title": "Entity detail ID",
+      "type": [
+        "string",
+        "number"
+      ]
+    },
+    "includeProfiles": {
+      "title": "Fetch profile detail for each result",
+      "type": "boolean",
+      "default": false
+    },
+    "profileConcurrency": {
+      "title": "Profile fetch concurrency",
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 10,
+      "default": 3
+    },
+    "maxItems": {
+      "title": "Maximum results to store",
+      "type": "integer",
+      "minimum": 0,
+      "default": 0,
+      "description": "0 means keep everything returned by the API."
+    },
+    "requestTimeoutSecs": {
+      "title": "Search request timeout (seconds)",
+      "type": "number",
+      "minimum": 5,
+      "default": 60
+    },
+    "proxyConfiguration": {
+      "title": "Proxy configuration",
+      "type": "object",
+      "editor": "proxy"
+    }
+  }
+}

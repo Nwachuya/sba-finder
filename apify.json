@@ -1,0 +1,10 @@
+{
+  "name": "sba-certifications-search",
+  "version": "1.0",
+  "buildTag": "latest",
+  "env": {
+    "NODE_ENV": "production"
+  },
+  "readme": "./README.md",
+  "main": "src/main.js"
+}

@@ -1,0 +1,17 @@
+{
+  "name": "sba-certifications-search-actor",
+  "version": "1.0.0",
+  "description": "Apify actor that queries SBA Small Business Search certifications data.",
+  "type": "module",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "apify run",
+    "dev": "node ./src/main.js"
+  },
+  "dependencies": {
+    "apify": "^3.5.1",
+    "got-scraping": "^4.1.2",
+    "p-limit": "^7.2.0",
+    "zod": "^4.1.12"
+  }
+}
