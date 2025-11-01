@@ -1,7 +1,7 @@
 {
   "title": "SBA Certifications Search",
   "type": "object",
-  "description": "Configure filters that will be sent to https://search.certifications.sba.gov/_api/v2/search. At least one filter must be provided (for example search term, state, SBA certification, NAICS code, etc.).",
+  "description": "Minimal configuration for querying https://search.certifications.sba.gov/_api/v2/search.",
   "schemaVersion": 1,
   "properties": {
     "searchTerm": {
@@ -13,11 +13,8 @@
     "states": {
       "title": "States or territories",
       "type": "array",
+      "description": "Select one or more two-letter state / territory codes.",
       "editor": "select",
-      "description": "Use two-letter abbreviations (case insensitive).",
-      "prefill": [
-        "ND"
-      ],
       "items": {
         "type": "string",
         "enum": [
@@ -83,145 +80,10 @@
         ]
       }
     },
-    "zipCodes": {
-      "title": "ZIP codes",
-      "type": "array",
-      "editor": "stringList",
-      "description": "Filter businesses by ZIP codes (string list).",
-      "items": {
-        "type": "string"
-      }
-    },
-    "sbaCertifications": {
-      "title": "SBA certifications",
-      "type": "array",
-      "editor": "select",
-      "description": "Pick one or more SBA certifications (values match the website filters).",
-      "prefill": [
-        "3"
-      ],
-      "items": {
-        "type": "string",
-        "enum": [
-          "1,4",
-          "3",
-          "5",
-          "6",
-          "7,8",
-          "9,10"
-        ]
-      }
-    },
-    "sbaCertificationsOperator": {
-      "title": "SBA certification operator",
-      "type": "string",
-      "description": "Operator used when multiple SBA certifications are selected.",
-      "enum": [
-        "Or",
-        "And"
-      ],
-      "editor": "select",
-      "default": "Or"
-    },
-    "sbaCertificationsIncludePrevious": {
-      "title": "Include previous certifications",
-      "type": "boolean",
-      "description": "Include businesses with previous SBA certifications.",
-      "editor": "checkbox",
-      "default": false
-    },
-    "naicsCodes": {
-      "title": "NAICS codes",
-      "type": "array",
-      "editor": "json",
-      "description": "Enter 6 digit NAICS codes. You can also supply objects with {\"code\": \"541611\", \"label\": \"Administrative Management\"}.",
-      "prefill": [
-        "237130",
-        "237990"
-      ],
-      "items": {
-        "type": [
-          "string",
-          "object"
-        ],
-        "properties": {
-          "code": {
-            "type": "string",
-            "title": "NAICS code",
-            "editor": "textfield"
-          },
-          "label": {
-            "type": "string",
-            "title": "NAICS label",
-            "editor": "textfield"
-          }
-        }
-      }
-    },
-    "naicsIsPrimary": {
-      "title": "Require primary NAICS match",
-      "type": "boolean",
-      "description": "Limit NAICS filter to only the primary NAICS code.",
-      "editor": "checkbox",
-      "default": false
-    },
-    "naicsOperator": {
-      "title": "NAICS operator",
-      "type": "string",
-      "description": "Operator used when multiple NAICS codes are provided.",
-      "editor": "select",
-      "enum": [
-        "Or",
-        "And"
-      ],
-      "default": "Or"
-    },
-    "selfCertifications": {
-      "title": "Self certifications",
-      "type": "array",
-      "editor": "select",
-      "description": "Self-certifications to require in the result list.",
-      "items": {
-        "type": "string",
-        "enum": [
-          "Self-Certified Small Disadvantaged Business",
-          "HUBZone Joint Venture",
-          "Veteran Owned Business",
-          "Women-Owned Small Business",
-          "Women-Owned Small Business Joint Venture",
-          "Community Development Corporation Owned Firm",
-          "Native American Owned",
-          "Tribally Owned Firm",
-          "American Indian Owned",
-          "Alaskan Native Corporation Owned Firm",
-          "Native Hawaiian Organization Owned Firm"
-        ]
-      }
-    },
-    "keywords": {
-      "title": "Keyword list",
-      "type": "array",
-      "editor": "stringList",
-      "description": "Keywords that must appear in the SBA profile (OR/AND controlled below).",
-      "items": {
-        "type": "string"
-      }
-    },
-    "keywordOperator": {
-      "title": "Keyword operator",
-      "type": "string",
-      "description": "Operator used when multiple keywords are specified.",
-      "editor": "select",
-      "enum": [
-        "Or",
-        "And"
-      ],
-      "default": "Or"
-    },
     "lastUpdated": {
       "title": "Profile last updated",
       "type": "string",
-      "description": "Choose preset time windows to limit by last updated date.",
+      "description": "Filter by when the SBA profile was last updated.",
       "editor": "select",
       "enum": [
         "anytime",
@@ -235,177 +97,31 @@
     "customDateRange": {
       "title": "Custom updated date range",
       "type": "object",
-      "editor": "schemaBased",
       "description": "Only used when lastUpdated = custom. Dates are interpreted as YYYY-MM-DD.",
+      "editor": "schemaBased",
       "properties": {
         "from": {
           "title": "From",
           "type": "string",
+          "description": "Start date (inclusive) in YYYY-MM-DD format.",
           "editor": "textfield"
         },
         "to": {
           "title": "To",
           "type": "string",
+          "description": "End date (inclusive) in YYYY-MM-DD format.",
           "editor": "textfield"
         }
       }
     },
-    "samActive": {
-      "title": "Active SAM registration",
-      "type": "boolean",
-      "description": "Require an active SAM registration flag.",
-      "editor": "checkbox",
-      "default": false
-    },
-    "qualityStandards": {
-      "title": "Quality assurance standards",
-      "type": "array",
-      "description": "Filter for businesses reporting these quality assurance standards.",
-      "editor": "select",
-      "items": {
-        "type": "string",
-        "enum": [
-          "ANSI/ASQC Z1.4",
-          "ISO-9000 Series",
-          "ISO 10012-1",
-          "MIL-Q-9858",
-          "MIL-STD-45662A"
-        ]
-      }
-    },
-    "bondingLevels": {
-      "title": "Bonding levels (USD)",
-      "type": "object",
-      "description": "Minimum bonding level thresholds to apply.",
-      "editor": "schemaBased",
-      "properties": {
-        "constructionIndividual": {
-          "title": "Construction individual",
-          "type": "number",
-          "editor": "number",
-          "minimum": 0
-        },
-        "constructionAggregate": {
-          "title": "Construction aggregate",
-          "type": "number",
-          "editor": "number",
-          "minimum": 0
-        },
-        "serviceIndividual": {
-          "title": "Service individual",
-          "type": "number",
-          "editor": "number",
-          "minimum": 0
-        },
-        "serviceAggregate": {
-          "title": "Service aggregate",
-          "type": "number",
-          "editor": "number",
-          "minimum": 0
-        }
-      }
-    },
-    "businessSize": {
-      "title": "Number of employees filter",
-      "type": "object",
-      "description": "Specify employee count constraints for the results.",
-      "editor": "schemaBased",
-      "properties": {
-        "relation": {
-          "type": "string",
-          "editor": "select",
-          "enum": [
-            "at-least",
-            "no-more"
-          ],
-          "default": "at-least"
-        },
-        "numberOfEmployees": {
-          "type": "number",
-          "editor": "number",
-          "minimum": 0
-        }
-      }
-    },
-    "annualRevenue": {
-      "title": "Annual gross revenue filter",
-      "type": "object",
-      "description": "Specify revenue thresholds for the results.",
-      "editor": "schemaBased",
-      "properties": {
-        "relation": {
-          "type": "string",
-          "editor": "select",
-          "enum": [
-            "at-least",
-            "no-more"
-          ],
-          "default": "at-least"
-        },
-        "annualGrossRevenue": {
-          "type": "number",
-          "editor": "number",
-          "minimum": 0
-        }
-      }
-    },
-    "entityDetailId": {
-      "title": "Entity detail ID",
-      "type": [
-        "string",
-        "number"
-      ],
-      "description": "Direct lookup by SBA entity detail identifier (string or number).",
-      "editor": "textfield"
-    },
-    "includeProfiles": {
-      "title": "Fetch profile detail for each result",
-      "type": "boolean",
-      "description": "If enabled, fetch the detailed SBA profile for each business.",
-      "editor": "checkbox",
-      "default": false,
-      "prefill": false
-    },
-    "profileConcurrency": {
-      "title": "Profile fetch concurrency",
-      "type": "integer",
-      "description": "Limit the number of simultaneous profile detail requests.",
-      "editor": "number",
-      "minimum": 1,
-      "maximum": 10,
-      "default": 3
-    },
     "maxItems": {
       "title": "Maximum results to store",
       "type": "integer",
+      "description": "Limit the number of businesses stored to the dataset (0 keeps everything).",
       "editor": "number",
       "minimum": 0,
-      "default": 0,
-      "prefill": 5,
-      "description": "0 means keep everything returned by the API."
-    },
-    "requestTimeoutSecs": {
-      "title": "Search request timeout (seconds)",
-      "type": "number",
-      "description": "HTTP timeout in seconds for each SBA API call.",
-      "editor": "number",
-      "minimum": 5,
-      "default": 60
-    },
-    "filtersJson": {
-      "title": "Advanced filters JSON override",
-      "type": [
-        "string",
-        "object"
-      ],
-      "editor": "json",
-      "description": "Optional raw filters payload that will be merged into the generated filters. Leave empty to rely solely on the form fields."
-    },
-    "proxyConfiguration": {
-      "title": "Proxy configuration",
-      "type": "object",
-      "description": "Configure Apify proxy usage for outbound HTTP requests.",
-      "editor": "proxy"
+      "default": 0
     }
-  }
+  },
+  "additionalProperties": false
 }
