@@ -1,10 +1,10 @@
 # SBA Certifications Search Actor
 
-This actor calls the official SBA Small Business Search API (`https://search.certifications.sba.gov/_api/v2/search`) and saves the returned businesses to the default dataset. You can reproduce the filters available on the public website and optionally enrich each result with the detailed profile endpoint.
+This actor calls the official SBA Small Business website and saves the returned businesses to the default dataset. 
 
 ## Input
 
-Key fields (see `.actor/input_schema.json` for the full list and defaults):
+Key fields:
 
 - `searchTerm` – optional full text search across name, UEI, CAGE code, keywords, etc. Defaults to `"car repair"`.
 - `states` – array of two-letter state / territory codes. At least one filter (search term or state) must be provided; the SBA API rejects completely empty searches. Defaults to `["AZ", "CA", "FM", "FL"]`.
@@ -22,19 +22,6 @@ Example input:
 }
 ```
 
-## Docker Build
-
-This project follows the standard Apify Docker flow (`Dockerfile` in the repository root). Build and test the image locally with:
-
-```bash
-docker build -t sba-certifications-search-actor .
-```
-
-Run the actor inside the container by providing the usual Apify input JSON:
-
-```bash
-docker run --rm -e APIFY_INPUT='{"searchTerm":"construction","states":["ND"]}' sba-certifications-search-actor
-```
 
 ## Output
 
