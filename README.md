@@ -4,7 +4,7 @@ This actor calls the official SBA Small Business Search API (`https://search.cer
 
 ## Input
 
-Key fields (see `actor/input_schema.json` for the full list):
+Key fields (see `actor/input_schema.json` for the full list and pre-filled console defaults):
 
 - `searchTerm` – full text search across name, UEI, CAGE code, keywords, etc.
 - `states` – array of two-letter state / territory codes. At least one filter (state, certification, NAICS, keyword, etc.) must be provided; the server rejects completely empty searches.
@@ -52,7 +52,8 @@ docker run --rm -e APIFY_INPUT='{"searchTerm":"construction","states":["ND"]}' s
   - Normalised fields (business name, UEI, CAGE, contact, location, NAICS codes, certifications, bonding levels, revenue, etc.).
   - `lastUpdateDateIso` – ISO timestamp converted from the epoch value.
   - `profile` + `profileError` if `includeProfiles` was enabled.
-  - `raw` – the untouched record from the `/_api/v2/search` response.
+- `raw` – the untouched record from the `/_api/v2/search` response.
+- The complete dataset contract is defined in `actor/dataset_schema.json`.
 - Key-value store record `OUTPUT` summarises total results, number stored, the exact filters sent to the API, and the `meili_filter` blob returned by the service.
 
 ## Notes

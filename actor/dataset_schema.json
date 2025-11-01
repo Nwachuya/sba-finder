@@ -1,0 +1,442 @@
+{
+  "title": "SBA Certifications Search Results",
+  "description": "Normalized output from https://search.certifications.sba.gov/_api/v2/search returned by the actor.",
+  "schemaVersion": 1,
+  "type": "object",
+  "properties": {
+    "entityDetailId": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Unique SBA entity detail identifier."
+    },
+    "uei": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Unique Entity Identifier (UEI)."
+    },
+    "cageCode": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "CAGE code associated with the business."
+    },
+    "businessName": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Registered legal business name."
+    },
+    "dbaName": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Doing-business-as (DBA) name."
+    },
+    "samExtractCode": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "SAM extract code."
+    },
+    "contact": {
+      "type": "object",
+      "description": "Primary contact information for the business.",
+      "properties": {
+        "name": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "phone": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "email": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "fax": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "location": {
+      "type": "object",
+      "description": "Physical location of the business.",
+      "properties": {
+        "address1": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "address2": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "city": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "state": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "zipcode": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "county": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "countyCode": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "fipsCode": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "congressionalDistrict": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "msa": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "website": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Primary website URL."
+    },
+    "additionalWebsite": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Secondary website URL."
+    },
+    "capabilitiesNarrative": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Narrative describing business capabilities."
+    },
+    "capabilitiesLink": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "URL that expands on capabilities."
+    },
+    "naicsPrimary": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Primary NAICS code."
+    },
+    "naicsAllCodes": {
+      "type": "array",
+      "description": "All NAICS codes associated with the entity.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "naicsSmallCodes": {
+      "type": "array",
+      "description": "NAICS codes where the entity qualifies as small.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "naicsExceptionCodes": {
+      "type": "array",
+      "description": "NAICS exception codes.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "sbaCertifications": {
+      "type": "array",
+      "description": "SBA certification records for the entity.",
+      "items": {
+        "type": "object"
+      }
+    },
+    "selfCertifications": {
+      "type": "array",
+      "description": "Self-certification labels returned by the API.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "qualityAssuranceStandards": {
+      "type": "array",
+      "description": "Quality assurance standards applied by the business.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "bondingLevels": {
+      "type": "object",
+      "description": "Bonding levels in USD.",
+      "properties": {
+        "constructionPerContract": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "constructionAggregate": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "servicePerContract": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "serviceAggregate": {
+          "type": [
+            "number",
+            "null"
+          ]
+        }
+      }
+    },
+    "exporter": {
+      "type": "object",
+      "description": "Exporter related metadata.",
+      "properties": {
+        "status": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "activities": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "exportTo": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "desiredRelationships": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "objective": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "businessSize": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Reported business size classification."
+    },
+    "annualRevenue": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "description": "Annual revenue reported by the business."
+    },
+    "yearEstablished": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Year the business was established."
+    },
+    "lastUpdateDateUnix": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "description": "Last update timestamp returned by the API (UNIX seconds)."
+    },
+    "lastUpdateDateIso": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "ISO formatted last update date."
+    },
+    "rankingScore": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "description": "Search ranking score provided by the API."
+    },
+    "profile": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "description": "Detailed SBA profile when requested."
+    },
+    "profileError": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Error captured while fetching profile detail."
+    },
+    "raw": {
+      "type": "object",
+      "description": "Unmodified raw result from the SBA API."
+    }
+  },
+  "required": [
+    "entityDetailId",
+    "businessName",
+    "sbaCertifications",
+    "naicsAllCodes"
+  ],
+  "examples": [
+    {
+      "entityDetailId": "116689",
+      "uei": "HB77AK8724X1",
+      "cageCode": "0NXR5",
+      "businessName": "HARVEY SAND & GRAVEL, INC",
+      "dbaName": "",
+      "samExtractCode": "A",
+      "contact": {
+        "name": "SUSAN SHEARER",
+        "phone": null,
+        "email": null,
+        "fax": null
+      },
+      "location": {
+        "address1": null,
+        "address2": null,
+        "city": "HARVEY",
+        "state": "North Dakota",
+        "zipcode": "58341",
+        "county": "Wells County",
+        "countyCode": "103",
+        "fipsCode": "38103",
+        "congressionalDistrict": "00",
+        "msa": null
+      },
+      "website": "",
+      "additionalWebsite": null,
+      "capabilitiesNarrative": "EROSION CONTROL, SUPPLYING AND HAULING SAND AND GRAVEL, CULVERT INSTALLATION, HAULING AND PLACING ROCK RIP RAP. SMALL EXCAVATION.",
+      "capabilitiesLink": null,
+      "naicsPrimary": "237990",
+      "naicsAllCodes": [
+        "212319",
+        "237110",
+        "237310",
+        "237990",
+        "423320"
+      ],
+      "naicsSmallCodes": [
+        "212319",
+        "237110",
+        "237310",
+        "237990",
+        "423320"
+      ],
+      "naicsExceptionCodes": [
+        "237990YY"
+      ],
+      "sbaCertifications": [
+        {
+          "name": "HUBZone",
+          "status": "Active",
+          "active": true,
+          "entranceDate": "September 24, 2019, 12:00 AM",
+          "exitDate": "September 24, 2027, 11:59 PM"
+        }
+      ],
+      "selfCertifications": [
+        "For Profit Organization",
+        "Women-Owned Small Business",
+        "Woman-Owned Business",
+        "DOT Certified DBE"
+      ],
+      "qualityAssuranceStandards": [],
+      "bondingLevels": {
+        "constructionPerContract": 1500000,
+        "constructionAggregate": 4000000,
+        "servicePerContract": 0,
+        "serviceAggregate": 0
+      },
+      "exporter": {
+        "status": "N",
+        "activities": null,
+        "exportTo": null,
+        "desiredRelationships": null,
+        "objective": null
+      },
+      "businessSize": null,
+      "annualRevenue": null,
+      "yearEstablished": "1985",
+      "lastUpdateDateUnix": 1737504000,
+      "lastUpdateDateIso": "2025-01-22T00:00:00.000Z",
+      "rankingScore": 1,
+      "profile": null,
+      "profileError": null
+    }
+  ]
+}

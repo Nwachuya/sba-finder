@@ -7,13 +7,17 @@
     "searchTerm": {
       "title": "Search term",
       "type": "string",
-      "description": "Full text query used by the Search SBA website (business name, UEI, CAGE code, keywords, etc.)."
+      "description": "Full text query used by the Search SBA website (business name, UEI, CAGE code, keywords, etc.).",
+      "prefill": "construction"
     },
     "states": {
       "title": "States or territories",
       "type": "array",
       "editor": "array",
       "description": "Use two-letter abbreviations (case insensitive).",
+      "prefill": [
+        "ND"
+      ],
       "items": {
         "type": "string",
         "enum": [
@@ -92,6 +96,9 @@
       "type": "array",
       "editor": "array",
       "description": "Pick one or more SBA certifications (values match the website filters).",
+      "prefill": [
+        "3"
+      ],
       "items": {
         "type": "string",
         "enum": [
@@ -123,6 +130,10 @@
       "type": "array",
       "editor": "array",
       "description": "Enter 6 digit NAICS codes. You can also supply objects with {\"code\": \"541611\", \"label\": \"Administrative Management\"}.",
+      "prefill": [
+        "237130",
+        "237990"
+      ],
       "items": {
         "type": [
           "string",
@@ -311,7 +322,8 @@
     "includeProfiles": {
       "title": "Fetch profile detail for each result",
       "type": "boolean",
-      "default": false
+      "default": false,
+      "prefill": false
     },
     "profileConcurrency": {
       "title": "Profile fetch concurrency",
@@ -325,6 +337,7 @@
       "type": "integer",
       "minimum": 0,
       "default": 0,
+      "prefill": 5,
       "description": "0 means keep everything returned by the API."
     },
     "requestTimeoutSecs": {
