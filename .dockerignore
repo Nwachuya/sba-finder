@@ -1,0 +1,10 @@
+node_modules
+apify_storage
+storage
+dist
+tmp
+*.log
+*.local
+.DS_Store
+.git
+.gitignore

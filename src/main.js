@@ -182,6 +182,7 @@ const InputSchema = z
         profileConcurrency: z.number().int().positive().max(10).optional(),
         maxItems: z.number().int().nonnegative().optional(),
         requestTimeoutSecs: z.number().positive().optional(),
+        filtersJson: z.union([z.string(), z.record(z.string(), z.any())]).optional(),
         proxyConfiguration: z.any().optional(),
     })
     .strict();
@@ -207,6 +208,47 @@ const qualityByValue = new Map(QUALITY_ASSURANCE_STANDARDS.map((opt) => [opt.val
 const qualityByLabel = new Map(QUALITY_ASSURANCE_STANDARDS.map((opt) => [opt.label.toLowerCase(), opt]));
 
 const deepClone = (obj) => JSON.parse(JSON.stringify(obj));
+
+const parseFiltersOverride = (value) => {
+    if (value === null || value === undefined) return null;
+    if (typeof value === 'string') {
+        const trimmed = value.trim();
+        if (!trimmed) return null;
+        try {
+            const parsed = JSON.parse(trimmed);
+            if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) {
+                throw new Error('JSON must be a plain object.');
+            }
+            return parsed;
+        } catch (error) {
+            throw new Error(`Failed to parse filtersJson: ${error.message}`);
+        }
+    }
+    if (typeof value === 'object' && !Array.isArray(value)) return deepClone(value);
+    throw new Error('filtersJson must be a JSON object or JSON string.');
+};
+
+const mergeFilters = (base, overrides) => {
+    if (!overrides) return base;
+    const mergeObject = (target, source) => {
+        for (const [key, value] of Object.entries(source)) {
+            if (
+                value &&
+                typeof value === 'object' &&
+                !Array.isArray(value) &&
+                target &&
+                typeof target[key] === 'object' &&
+                !Array.isArray(target[key])
+            ) {
+                mergeObject(target[key], value);
+            } else {
+                target[key] = value;
+            }
+        }
+        return target;
+    };
+    return mergeObject(base, overrides);
+};
 
 const toSimpleOption = (value) => {
     if (value && typeof value === 'object' && !Array.isArray(value)) {
@@ -590,10 +632,20 @@ try {
         ? await Actor.createProxyConfiguration(input.proxyConfiguration)
         : null;
 
-    const filters = buildFilters(input);
-    const activeFilterCount = countActiveFilters(filters);
-    if (activeFilterCount === 0) {
+    const filtersOverride = parseFiltersOverride(input.filtersJson ?? null);
+    const filters = mergeFilters(buildFilters(input), filtersOverride);
+    let activeFilterCount = 0;
+    try {
+        activeFilterCount = countActiveFilters(filters);
+    } catch (error) {
+        if (!filtersOverride) throw error;
+        log.warning(`Unable to evaluate active filters after applying filtersJson override: ${error.message}`);
+    }
+    if (!filtersOverride && activeFilterCount === 0) {
         throw new Error('At least one filter must be provided (search term, state, certification, NAICS code, etc.).');
+    }
+    if (filtersOverride && activeFilterCount === 0) {
+        log.warning('filtersJson override did not produce any detectable active filters; the SBA API may reject the request.');
     }
 
     log.info(`Fetching SBA businesses with ${activeFilterCount} active filter(s).`);

@@ -16,6 +16,7 @@ Key fields (see `actor/input_schema.json` for the full list):
 - `includeProfiles` – fetch `/_api/v2/profile/{uei}/{cage}` for each result (default `false`). Use `profileConcurrency` to limit concurrent detail requests.
 - `maxItems` – trim the returned array (0 keeps everything the API sends back).
 - `requestTimeoutSecs` – HTTP timeout per call (default 60 seconds).
+- `filtersJson` – optional JSON override that merges directly into the generated filter payload for power users.
 - `proxyConfiguration` – optional Apify proxy settings.
 
 Example input:
@@ -29,6 +30,20 @@ Example input:
   "includeProfiles": true,
   "maxItems": 100
 }
+```
+
+## Docker Build
+
+This project follows the standard Apify Docker flow (`Dockerfile` in the repository root). Build and test the image locally with:
+
+```bash
+docker build -t sba-certifications-search-actor .
+```
+
+Run the actor inside the container by providing the usual Apify input JSON:
+
+```bash
+docker run --rm -e APIFY_INPUT='{"searchTerm":"construction","states":["ND"]}' sba-certifications-search-actor
 ```
 
 ## Output

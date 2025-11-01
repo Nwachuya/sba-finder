@@ -333,6 +333,15 @@
       "minimum": 5,
       "default": 60
     },
+    "filtersJson": {
+      "title": "Advanced filters JSON override",
+      "type": [
+        "string",
+        "object"
+      ],
+      "editor": "json",
+      "description": "Optional raw filters payload that will be merged into the generated filters. Leave empty to rely solely on the form fields."
+    },
     "proxyConfiguration": {
       "title": "Proxy configuration",
       "type": "object",
