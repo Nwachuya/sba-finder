@@ -8,13 +8,20 @@
       "title": "Search term",
       "type": "string",
       "description": "Full text query used by the Search SBA website (business name, UEI, CAGE code, keywords, etc.).",
-      "editor": "textfield"
+      "editor": "textfield",
+      "prefill": "car repair"
     },
     "states": {
       "title": "States or territories",
       "type": "array",
       "description": "Select one or more two-letter state / territory codes.",
       "editor": "select",
+      "prefill": [
+        "AZ",
+        "CA",
+        "FM",
+        "FL"
+      ],
       "items": {
         "type": "string",
         "enum": [
@@ -92,7 +99,7 @@
         "past-year",
         "custom"
       ],
-      "default": "anytime"
+      "default": "past-year"
     },
     "customDateRange": {
       "title": "Custom updated date range",
@@ -120,7 +127,7 @@
       "description": "Limit the number of businesses stored to the dataset (0 keeps everything).",
       "editor": "number",
       "minimum": 0,
-      "default": 0
+      "default": 20
     }
   },
   "additionalProperties": false

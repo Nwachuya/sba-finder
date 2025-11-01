@@ -6,18 +6,19 @@ This actor calls the official SBA Small Business Search API (`https://search.cer
 
 Key fields (see `.actor/input_schema.json` for the full list and defaults):
 
-- `searchTerm` – optional full text search across name, UEI, CAGE code, keywords, etc.
-- `states` – array of two-letter state / territory codes. At least one filter (search term or state) must be provided; the SBA API rejects completely empty searches.
-- `lastUpdated` – `"anytime"`, `"past-3-months"`, `"past-6-months"`, `"past-year"`, or `"custom"` with `customDateRange`.
-- `maxItems` – trim the returned array (0 keeps everything the API sends back).
+- `searchTerm` – optional full text search across name, UEI, CAGE code, keywords, etc. Defaults to `"car repair"`.
+- `states` – array of two-letter state / territory codes. At least one filter (search term or state) must be provided; the SBA API rejects completely empty searches. Defaults to `["AZ", "CA", "FM", "FL"]`.
+- `lastUpdated` – `"anytime"`, `"past-3-months"`, `"past-6-months"`, `"past-year"`, or `"custom"` with `customDateRange`. Defaults to `"past-year"`.
+- `maxItems` – trim the returned array (0 keeps everything the API sends back). Defaults to `20`.
 
 Example input:
 
 ```json
 {
-  "states": ["ND"],
+  "searchTerm": "car repair",
+  "states": ["AZ", "CA", "FM", "FL"],
   "lastUpdated": "past-year",
-  "maxItems": 25
+  "maxItems": 20
 }
 ```
 
