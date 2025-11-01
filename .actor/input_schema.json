@@ -7,8 +7,7 @@
     "searchTerm": {
       "title": "Search term",
       "type": "string",
-      "description": "Full text query used by the Search SBA website (business name, UEI, CAGE code, keywords, etc.).",
-      "prefill": "construction"
+      "description": "Full text query used by the Search SBA website (business name, UEI, CAGE code, keywords, etc.)."
     },
     "states": {
       "title": "States or territories",
