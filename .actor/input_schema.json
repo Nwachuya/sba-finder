@@ -13,7 +13,7 @@
     "states": {
       "title": "States or territories",
       "type": "array",
-      "editor": "array",
+      "editor": "select",
       "description": "Use two-letter abbreviations (case insensitive).",
       "prefill": [
         "ND"
@@ -86,7 +86,7 @@
     "zipCodes": {
       "title": "ZIP codes",
       "type": "array",
-      "editor": "array",
+      "editor": "stringList",
       "items": {
         "type": "string"
       }
@@ -94,7 +94,7 @@
     "sbaCertifications": {
       "title": "SBA certifications",
       "type": "array",
-      "editor": "array",
+      "editor": "select",
       "description": "Pick one or more SBA certifications (values match the website filters).",
       "prefill": [
         "3"
@@ -118,17 +118,19 @@
         "Or",
         "And"
       ],
+      "editor": "select",
       "default": "Or"
     },
     "sbaCertificationsIncludePrevious": {
       "title": "Include previous certifications",
       "type": "boolean",
+      "editor": "checkbox",
       "default": false
     },
     "naicsCodes": {
       "title": "NAICS codes",
       "type": "array",
-      "editor": "array",
+      "editor": "json",
       "description": "Enter 6 digit NAICS codes. You can also supply objects with {\"code\": \"541611\", \"label\": \"Administrative Management\"}.",
       "prefill": [
         "237130",
@@ -142,11 +144,13 @@
         "properties": {
           "code": {
             "type": "string",
-            "title": "NAICS code"
+            "title": "NAICS code",
+            "editor": "textfield"
           },
           "label": {
             "type": "string",
-            "title": "NAICS label"
+            "title": "NAICS label",
+            "editor": "textfield"
           }
         }
       }
@@ -154,11 +158,13 @@
     "naicsIsPrimary": {
       "title": "Require primary NAICS match",
       "type": "boolean",
+      "editor": "checkbox",
       "default": false
     },
     "naicsOperator": {
       "title": "NAICS operator",
       "type": "string",
+      "editor": "select",
       "enum": [
         "Or",
         "And"
@@ -168,7 +174,7 @@
     "selfCertifications": {
       "title": "Self certifications",
       "type": "array",
-      "editor": "array",
+      "editor": "select",
       "items": {
         "type": "string",
         "enum": [
@@ -189,7 +195,7 @@
     "keywords": {
       "title": "Keyword list",
       "type": "array",
-      "editor": "array",
+      "editor": "stringList",
       "items": {
         "type": "string"
       }
@@ -197,6 +203,7 @@
     "keywordOperator": {
       "title": "Keyword operator",
       "type": "string",
+      "editor": "select",
       "enum": [
         "Or",
         "And"
@@ -206,6 +213,7 @@
     "lastUpdated": {
       "title": "Profile last updated",
       "type": "string",
+      "editor": "select",
       "enum": [
         "anytime",
         "past-3-months",
@@ -218,27 +226,31 @@
     "customDateRange": {
       "title": "Custom updated date range",
       "type": "object",
+      "editor": "schemaBased",
       "description": "Only used when lastUpdated = custom. Dates are interpreted as YYYY-MM-DD.",
       "properties": {
         "from": {
           "title": "From",
-          "type": "string"
+          "type": "string",
+          "editor": "textfield"
         },
         "to": {
           "title": "To",
-          "type": "string"
+          "type": "string",
+          "editor": "textfield"
         }
       }
     },
     "samActive": {
       "title": "Active SAM registration",
       "type": "boolean",
+      "editor": "checkbox",
       "default": false
     },
     "qualityStandards": {
       "title": "Quality assurance standards",
       "type": "array",
-      "editor": "array",
+      "editor": "select",
       "items": {
         "type": "string",
         "enum": [
@@ -253,25 +265,30 @@
     "bondingLevels": {
       "title": "Bonding levels (USD)",
       "type": "object",
+      "editor": "schemaBased",
       "properties": {
         "constructionIndividual": {
           "title": "Construction individual",
           "type": "number",
+          "editor": "number",
           "minimum": 0
         },
         "constructionAggregate": {
           "title": "Construction aggregate",
           "type": "number",
+          "editor": "number",
           "minimum": 0
         },
         "serviceIndividual": {
           "title": "Service individual",
           "type": "number",
+          "editor": "number",
           "minimum": 0
         },
         "serviceAggregate": {
           "title": "Service aggregate",
           "type": "number",
+          "editor": "number",
           "minimum": 0
         }
       }
@@ -279,9 +296,11 @@
     "businessSize": {
       "title": "Number of employees filter",
       "type": "object",
+      "editor": "schemaBased",
       "properties": {
         "relation": {
           "type": "string",
+          "editor": "select",
           "enum": [
             "at-least",
             "no-more"
@@ -290,6 +309,7 @@
         },
         "numberOfEmployees": {
           "type": "number",
+          "editor": "number",
           "minimum": 0
         }
       }
@@ -300,6 +320,7 @@
       "properties": {
         "relation": {
           "type": "string",
+          "editor": "select",
           "enum": [
             "at-least",
             "no-more"
@@ -308,6 +329,7 @@
         },
         "annualGrossRevenue": {
           "type": "number",
+          "editor": "number",
           "minimum": 0
         }
       }
@@ -317,17 +339,20 @@
       "type": [
         "string",
         "number"
-      ]
+      ],
+      "editor": "textfield"
     },
     "includeProfiles": {
       "title": "Fetch profile detail for each result",
       "type": "boolean",
+      "editor": "checkbox",
       "default": false,
       "prefill": false
     },
     "profileConcurrency": {
       "title": "Profile fetch concurrency",
       "type": "integer",
+      "editor": "number",
       "minimum": 1,
       "maximum": 10,
       "default": 3
@@ -335,6 +360,7 @@
     "maxItems": {
       "title": "Maximum results to store",
       "type": "integer",
+      "editor": "number",
       "minimum": 0,
       "default": 0,
       "prefill": 5,
@@ -343,6 +369,7 @@
     "requestTimeoutSecs": {
       "title": "Search request timeout (seconds)",
       "type": "number",
+      "editor": "number",
       "minimum": 5,
       "default": 60
     },
